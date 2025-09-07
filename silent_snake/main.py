@@ -4,6 +4,7 @@ import csv
 from urllib.parse import urlparse, urljoin
 import re
 from typing import Any
+import signal
 
 EXCLUDED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf', 'docx', 'xlsx', 'zip', 'rar']
 type URL = str
@@ -102,6 +103,14 @@ def scrape_page(url:URL, domain:Domain) -> tuple[dict[str, Any], list] | None:
     return page_data, links
 
 def main():   
+    
+    # Handle graceful exit on Ctrl+C
+    def exit_gracefully(signum, frame):
+        print("\nExiting gracefully...")
+        # Perform collective tasks here if needed
+        exit(0)
+    signal.signal(signal.SIGINT, exit_gracefully)
+
     input_url = input("Enter the URL: ")
     try:
         start_url = sanitise_url(input_url)
