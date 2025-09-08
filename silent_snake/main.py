@@ -146,9 +146,9 @@ def main():
                         if link not in visited_urls:
                             to_visit_urls.add(link)
     getData()
-
-    if retry_urls.__len__ != 0:
-        print(f"retying {retry_urls.__len__} urls")
+    
+    if len(retry_urls)!= 0:
+        print(f"retrying {len(retry_urls)} urls")
         for retry_url in retry_urls:
             to_visit_urls.add(retry_url)
         getData()
