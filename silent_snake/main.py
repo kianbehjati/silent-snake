@@ -85,7 +85,7 @@ def scrape_page(url:URL, domain:Domain) -> tuple[dict[str, Any], list] | None:
             page_data[f'{h_tag} - {i}'] = tag_text
 
     page_data.update({
-        'Title': soup.title.string.strip() if soup.title else '',
+        'Title': soup.title.string.strip() if soup.title.string else '',
         'META Description': soup.find('meta', {'name': 'description'})['content'].strip() if soup.find('meta', {'name': 'description'}) else ''
     })
 
